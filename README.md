@@ -2,6 +2,11 @@
 
 This repository contains the **Anigal** photo gallery app, built exclusively for landscape display. It leverages React, Vite, Tailwind CSS, and Framer Motion to create an interactive and visually engaging gallery experience. 
 
+## Link:
+ ```bash
+ https://SuyashSharma1710.github.io/Anigal_React
+```
+
 ## Features
 - **Landscape-Only Design**: Optimized for larger screens in landscape mode.
 - **Smooth Animations**: Transitions and scaling effects using Framer Motion.
