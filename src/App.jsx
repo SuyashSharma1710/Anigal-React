@@ -40,25 +40,33 @@ function App() {
 
   return (
     <div className="h-screen relative overflow-hidden">
-      <img src={img} alt="" className="h-full w-full object-center object-cover absolute top-0   z-0"   />
+      <img
+        src={img}
+        alt=""
+        className="h-full w-full object-center object-cover absolute top-0 z-0"
+      />
       <motion.img
         src={img}
         className="h-full w-full object-center object-cover static z-0"
         alt="Background"
-          animate={triggerAnimation ? { opacity: [0, 1], scale: [0.95, 1] } : { opacity: [0, 1], scale: [0.955, 1]  }}
+        animate={
+          triggerAnimation
+            ? { opacity: [0, 1], scale: [0.95, 1] }
+            : { opacity: [0, 1], scale: [0.955, 1] }
+        }
         transition={{
           opacity: { duration: 0.5, times: [0, 0.5, 1] },
           scale: { duration: 0.5 },
         }}
       />
 
-      <nav className="h-20 w-full flex justify-evenly items-center absolute z-10 top-0">
+      <nav className="min-h-16 w-full flex flex-wrap sm:flex-nowrap justify-center sm:justify-evenly gap-2 px-3 py-3 items-center absolute z-10 top-0 bg-black/20 backdrop-blur-sm">
         {anipics.map((anipic, index) => (
-          <div key={index} className="flex-1 flex justify-center items-center">
+          <div key={index} className="flex justify-center items-center">
             <motion.p
               onClick={() => bgimg(index)}
-              className="text-xs leading-none rounded-md p-1 cursor-pointer text-nowrap bg-black bg-opacity-15 hover:bg-opacity-60"
-              whileHover={{ scale: 1.5, width: "120px" }}
+              className="text-[10px] sm:text-xs leading-none rounded-md px-2 py-1 cursor-pointer whitespace-nowrap bg-black/25 hover:bg-black/60"
+              whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 1.2 }}
               transition={{ type: "spring", bounce: 0.5, duration: 0.8 }}
             >
@@ -68,15 +76,15 @@ function App() {
         ))}
       </nav>
 
-      <div className="bg-black h-48 w-[137vw] rounded-3xl bg-opacity-30 absolute top-[350px] left-1/2 flex p-2 gap-2 items-center">
+      <div className="bg-black/35 w-[95vw] sm:w-[90vw] md:w-[85vw] max-w-6xl h-28 sm:h-32 md:h-36 lg:h-44 rounded-2xl sm:rounded-3xl absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 flex p-2 sm:p-3 gap-2 overflow-x-auto overflow-y-hidden items-center z-10 backdrop-blur-sm">
         <AnimatePresence>
           {imageSources.map((src, index) => (
             <motion.div
               key={src}
-              className="h-full w-40 overflow-hidden rounded-3xl bg-white bg-opacity-30 cursor-pointer"
+              className="h-full min-w-24 w-24 sm:min-w-28 sm:w-28 md:min-w-32 md:w-32 lg:min-w-36 lg:w-36 overflow-hidden rounded-xl sm:rounded-2xl bg-white/30 cursor-pointer"
               onClick={() => handleImageClick(src)}
               initial={{ opacity: 1 }}
-              whileTap={{ scale: 1.2, opacity: 0, x:-30 , y:-30 }}
+              whileTap={{ scale: 1.1, opacity: 0, x: -20, y: -20 }}
               transition={{ duration: 0.2 }}
             >
               <motion.img
