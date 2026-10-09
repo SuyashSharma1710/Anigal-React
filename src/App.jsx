@@ -9,7 +9,7 @@ function App() {
   const [triggerAnimation, setTriggerAnimation] = useState(false);
 
   const handleClick = () => {
-    setTriggerAnimation((prev) => !prev);
+    setTriggerAnimation(!triggerAnimation); // Toggle the state to trigger the animation
   };
 
   const bgimg = (index) => {
@@ -17,10 +17,10 @@ function App() {
     setImg(newImg);
     handleClick();
 
+
     const newArray = anipics[index].pics.slice(1, 12);
     setImageSources(newArray);
   };
-
   const handleImageClick = (src) => {
     setImg(src);
     handleClick();
@@ -39,15 +39,15 @@ function App() {
   };
 
   return (
-    <div className="relative h-screen w-full overflow-hidden">
+    <div className="h-screen relative overflow-hidden">
       <img
         src={img}
         alt=""
-        className="absolute top-0 z-0 h-full w-full object-cover object-center"
+        className="h-full w-full object-center object-cover absolute top-0 z-0"
       />
       <motion.img
         src={img}
-        className="static z-0 h-full w-full object-cover object-center"
+        className="h-full w-full object-center object-cover static z-0"
         alt="Background"
         animate={
           triggerAnimation
@@ -60,15 +60,15 @@ function App() {
         }}
       />
 
-      <nav className="absolute top-0 z-10 flex w-full gap-1 overflow-x-auto px-2 py-3 sm:justify-evenly sm:gap-2 sm:py-4 md:overflow-visible md:px-4">
+      <nav className="min-h-16 w-full flex flex-wrap sm:flex-nowrap justify-center sm:justify-evenly gap-2 px-3 py-3 items-center absolute z-10 top-0 bg-black/20 backdrop-blur-sm">
         {anipics.map((anipic, index) => (
-          <div key={index} className="flex shrink-0 justify-center md:flex-1">
+          <div key={index} className="flex justify-center items-center">
             <motion.p
               onClick={() => bgimg(index)}
-              className="cursor-pointer whitespace-nowrap rounded-md bg-black/30 px-2 py-1 text-[10px] leading-none text-white backdrop-blur-sm transition-colors hover:bg-black/60 sm:text-xs"
+              className="text-[10px] sm:text-xs leading-none rounded-md px-2 py-1 cursor-pointer whitespace-nowrap bg-black/25 hover:bg-black/60"
               whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-              transition={{ type: "spring", bounce: 0.4, duration: 0.4 }}
+              whileTap={{ scale: 1.2 }}
+              transition={{ type: "spring", bounce: 0.5, duration: 0.8 }}
             >
               {anipic.name}
             </motion.p>
@@ -76,20 +76,20 @@ function App() {
         ))}
       </nav>
 
-      <div className="absolute bottom-3 left-1/2 z-10 flex w-[96vw] -translate-x-1/2 items-center gap-2 overflow-x-auto rounded-2xl bg-black/35 p-2 backdrop-blur-sm sm:bottom-4 sm:w-[94vw] sm:rounded-3xl sm:p-3 md:w-[90vw] lg:w-[85vw]">
+      <div className="bg-black/35 w-[95vw] sm:w-[90vw] md:w-[85vw] max-w-6xl h-28 sm:h-32 md:h-36 lg:h-44 rounded-2xl sm:rounded-3xl absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 flex p-2 sm:p-3 gap-2 overflow-x-auto overflow-y-hidden items-center z-10 backdrop-blur-sm">
         <AnimatePresence>
           {imageSources.map((src, index) => (
             <motion.div
               key={src}
-              className="h-28 w-24 shrink-0 cursor-pointer overflow-hidden rounded-2xl bg-white/30 sm:h-32 sm:w-28 md:h-36 md:w-32"
+              className="h-full min-w-24 w-24 sm:min-w-28 sm:w-28 md:min-w-32 md:w-32 lg:min-w-36 lg:w-36 overflow-hidden rounded-xl sm:rounded-2xl bg-white/30 cursor-pointer"
               onClick={() => handleImageClick(src)}
               initial={{ opacity: 1 }}
-              whileTap={{ scale: 1.05, opacity: 0.85, y: -8 }}
+              whileTap={{ scale: 1.1, opacity: 0, x: -20, y: -20 }}
               transition={{ duration: 0.2 }}
             >
               <motion.img
                 src={src}
-                className="h-full w-full object-cover"
+                className="object-cover h-full w-full"
                 alt={`Gallery item ${index + 1}`}
                 transition={{ duration: 1 }}
               />
